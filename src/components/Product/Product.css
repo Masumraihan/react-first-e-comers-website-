@@ -1,0 +1,17 @@
+.product{
+    display: flex;
+    align-items: center;
+}
+.details{
+    margin-left: 50px;
+}
+.details .title{
+    color: blue;
+}
+.details .main_btn{
+    background-color: orange;
+    border: 1px solid gray;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
