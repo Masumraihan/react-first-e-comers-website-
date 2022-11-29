@@ -1,0 +1,19 @@
+.review_item{
+    display: flex;
+    align-items: center;
+    margin: 40px;
+    border-bottom: 1px solid lightgray;
+}
+.reviewItem_title{
+    color: blue;
+}
+.review_details{
+    margin-left: 40px;
+}
+.remove_btn{
+    background-color: orange;
+    border: 1px solid gray;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}

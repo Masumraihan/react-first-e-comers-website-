@@ -3,7 +3,7 @@ import './cart.css'
 
 const Cart = (props) => {
     const cart = props.cart;
-    console.log(cart);
+    //console.log(cart);
     //const total = cart.reduce( (total,prd) => total + prd.price, 0);
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -21,6 +21,7 @@ const Cart = (props) => {
         shipping = 8.99;
     }
     const tax = total / 10;
+    const productPrice = total.toFixed(2)
     const getNumber = (num) => {
         const precision = num.toFixed(2);
         return Number(precision);
@@ -32,7 +33,7 @@ const Cart = (props) => {
             <h4>Items Ordered : {cart.length}</h4>
             <p>Shipping Cost : ${shipping}</p>
             <p>Tax: ${getNumber(tax)}</p>
-            <h5>Product Price: ${total}</h5>
+            <h5>Product Price: ${productPrice}</h5>
             <p>Total : ${getNumber(grandTotal)}</p>
         </div>
     );
