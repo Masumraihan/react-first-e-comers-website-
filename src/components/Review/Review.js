@@ -1,10 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import fakeData from '../../fakeData';
-import { getDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
+import thanksImg from '../../images/giphy.gif';
+import { createBrowserHistory } from '@remix-run/router';
 
 const Review = () => {
     const [cart,setCart] = useState([]);
+    const [orderPlaced,setOrderPlaced] = useState(false);
+    const history = createBrowserHistory()
+
+    const handleProceedCheckout = () => {
+        history.push("/shipment")
+        
+    }
+
+    const removeProduct = (productKey) =>{
+        const newCart = cart.filter(pd => pd.key !== productKey);
+        setCart(newCart);
+        removeFromDatabaseCart(productKey);
+    }
+    
     useEffect(()=> {
         //cart
         const saveCart = getDatabaseCart();
@@ -17,13 +34,26 @@ const Review = () => {
         //console.log(cartProducts);
         setCart(cartProducts);
     },[])
+    let thankYou;
+    if (orderPlaced) {
+        thankYou = <img src={thanksImg} alt="" />
+    }
     return (
-        <div>
+        <div className='shop_container'>
+            <div className="product_container">
             {
                 cart.map(pd => <ReviewItem 
                     key = {pd.key}
+                    removeProduct = {removeProduct}
                     product = {pd}></ReviewItem>)
             }
+            {thankYou}
+            </div>
+            <div className="cart_container">
+                <Cart cart = {cart}>
+                    <button onClick={handleProceedCheckout} className='btn'>Proceed Checkout</button>
+                </Cart>
+            </div>
         </div>
     );
 };
